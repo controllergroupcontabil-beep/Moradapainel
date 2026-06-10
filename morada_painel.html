@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morada Fisioterapia — Painel de Construção | ProUP!</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1a2740;--gold:#c8a84b;--gold-lt:#fef9ec;--gold-bd:rgba(200,168,75,0.25);
+  --cream:#f7f4ee;--white:#ffffff;--gray:#6b7280;--border:rgba(26,39,64,0.1);
+  --mo:#8B5E52;--mo-lt:#F2E8E5;--mo-mid:#C49A8E;--mo-dk:#5C3D35;
+  --sage:#5C7A6B;--sage-lt:#EAF0ED;
+  --teal:#1D9E75;--teal-lt:#E1F5EE;
+  --amber:#BA7517;--amber-lt:#FAEEDA;
+  --red-lt:#fee2e2;--red:#991b1b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--navy);font-size:14px;line-height:1.6}
+
+/* ── NAV ── */
+.nav{background:var(--navy);padding:12px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:10px}
+.nav-brand{display:flex;align-items:center;gap:14px}
+.proup-logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:#fff;letter-spacing:-0.3px}
+.proup-logo span{color:var(--gold)}
+.nav-divider{width:1px;height:24px;background:rgba(255,255,255,0.15)}
+.client-name{font-size:13px;color:rgba(255,255,255,0.6);font-weight:400}
+.nav-tabs{display:flex;gap:4px;flex-wrap:wrap}
+.ntab{padding:5px 12px;font-size:11px;border-radius:20px;border:0.5px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);background:transparent;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;white-space:nowrap}
+.ntab:hover{background:rgba(255,255,255,0.08);color:#fff}
+.ntab.on{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:500}
+
+/* ── PAGES ── */
+.page{display:none;padding:28px 28px 40px;max-width:1100px;margin:0 auto}
+.page.on{display:block}
+
+/* ── HERO ── */
+.hero{background:var(--navy);border-radius:16px;padding:32px 36px;margin-bottom:20px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(200,168,75,0.07);pointer-events:none}
+.hero::after{content:'';position:absolute;left:-40px;bottom:-60px;width:180px;height:180px;border-radius:50%;background:rgba(139,94,82,0.12);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(200,168,75,0.12);border:0.5px solid var(--gold-bd);color:var(--gold);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:16px}
+.hero-title{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#fff;line-height:1.15;margin-bottom:8px}
+.hero-title em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:20px}
+.hero-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.hm{background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px 14px}
+.hm-val{font-size:22px;font-weight:500;color:#fff}
+.hm-val.gold{color:var(--gold)}
+.hm-val.teal{color:#5DCAA5}
+.hm-lbl{font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px}
+.prog-bar{height:4px;background:rgba(255,255,255,0.1);border-radius:99px;overflow:hidden;margin-top:6px}
+.prog-fill{height:100%;background:var(--gold);border-radius:99px;transition:width .4s}
+
+/* ── SUB NAV (section tabs) ── */
+.stabs{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap}
+.stab{padding:6px 14px;font-size:12px;border-radius:20px;border:0.5px solid var(--border);background:transparent;color:var(--gray);cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
+.stab:hover{border-color:rgba(26,39,64,0.3);color:var(--navy)}
+.stab.on{background:var(--navy);color:#fff;border-color:var(--navy);font-weight:500}
+.spanel{display:none}.spanel.on{display:block}
+
+/* ── FASE CARDS ── */
+.fase-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:8px;margin-bottom:18px}
+.fase-card{background:var(--white);border:0.5px solid var(--border);border-radius:12px;padding:12px;cursor:pointer;transition:all .18s}
+.fase-card:hover{border-color:var(--mo-mid)}
+.fase-card.sel{border:1.5px solid var(--mo);background:var(--mo-lt)}
+.fase-card.done{background:var(--mo-lt);border-color:var(--mo-mid)}
+.fc-icon{font-size:18px;margin-bottom:6px}
+.fc-n{font-size:10px;color:var(--gray);margin-bottom:2px;text-transform:uppercase;letter-spacing:.5px}
+.fc-name{font-size:12px;font-weight:500;color:var(--navy);line-height:1.3}
+.fc-bar{height:3px;background:var(--border);border-radius:99px;overflow:hidden;margin-top:8px}
+.fc-fill{height:100%;background:var(--mo);border-radius:99px}
+.fc-pct{font-size:10px;color:var(--gray);margin-top:3px}
+
+/* ── TASK LIST ── */
+.task-box{background:var(--white);border:0.5px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:14px}
+.task-head{padding:10px 16px;background:rgba(26,39,64,0.03);border-bottom:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.th-left{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--navy)}
+.th-count{font-size:11px;color:var(--gray)}
+.task-item{border-bottom:0.5px solid var(--border);padding:10px 14px;transition:background .15s}
+.task-item:last-child{border-bottom:none}
+.task-item.done{background:rgba(242,232,229,0.4)}
+.ti-row{display:flex;align-items:flex-start;gap:10px;cursor:pointer;user-select:none}
+.ti-chk{width:18px;height:18px;border-radius:4px;border:1.5px solid var(--border);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .15s;font-size:11px}
+.task-item.done .ti-chk{background:var(--mo);border-color:var(--mo);color:#fff}
+.ti-body{flex:1}
+.ti-title{font-size:13px;font-weight:500;color:var(--navy);line-height:1.4;display:flex;align-items:center;flex-wrap:wrap;gap:5px}
+.ti-desc{font-size:12px;color:var(--gray);margin-top:2px;line-height:1.5}
+.tag{display:inline-block;font-size:10px;padding:1px 7px;border-radius:99px;font-weight:500}
+.tag-p{background:var(--amber-lt);color:var(--amber)}
+.tag-r{background:var(--teal-lt);color:var(--teal)}
+.ti-note{margin-top:8px}
+.ti-note textarea{width:100%;font-size:12px;padding:6px 10px;border:0.5px solid var(--border);border-radius:8px;background:var(--cream);color:var(--navy);resize:vertical;min-height:50px;font-family:'DM Sans',sans-serif;transition:border-color .15s}
+.ti-note textarea:focus{outline:none;border-color:var(--mo)}
+
+/* ── FINANCEIRO ── */
+.calc-card{background:var(--white);border:0.5px solid var(--border);border-radius:14px;padding:18px;margin-bottom:14px}
+.cc-title{font-size:14px;font-weight:500;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.cc-title-gold{color:var(--gold)}
+.slider-row{margin-bottom:12px}
+.sl-label{font-size:11px;color:var(--gray);margin-bottom:4px;text-transform:uppercase;letter-spacing:.4px}
+.sl-wrap{display:flex;align-items:center;gap:10px}
+.sl-wrap input[type=range]{flex:1;-webkit-appearance:none;height:3px;border-radius:99px;background:var(--border);outline:none}
+.sl-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--mo);cursor:pointer;border:2px solid var(--white);box-shadow:0 0 0 2px var(--mo-mid)}
+.sl-val{font-size:13px;font-weight:500;color:var(--mo);min-width:80px;text-align:right}
+.res-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-top:14px}
+.res-card{background:var(--cream);border-radius:10px;padding:10px 12px}
+.res-val{font-size:16px;font-weight:500;color:var(--navy)}
+.res-val.green{color:var(--teal)}
+.res-val.amber{color:var(--amber)}
+.res-val.mo{color:var(--mo)}
+.res-lbl{font-size:11px;color:var(--gray);margin-top:2px}
+.cost-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.cost-row{display:flex;justify-content:space-between;font-size:12px;padding:6px 10px;background:var(--cream);border-radius:8px}
+.cost-row span:first-child{color:var(--gray)}
+.cost-row span:last-child{font-weight:500}
+.cost-row.total{background:var(--mo-lt)}
+.cost-row.total span{color:var(--mo-dk);font-weight:500}
+
+/* ── COMPARATIVO ── */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:14px}
+.comp-card{background:var(--white);border:0.5px solid var(--border);border-radius:14px;padding:14px}
+.comp-card.rec{border:2px solid var(--teal)}
+.comp-name{font-size:14px;font-weight:500;color:var(--navy);margin-bottom:2px}
+.comp-badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:99px;margin-bottom:8px;font-weight:500}
+.b-rec{background:var(--teal-lt);color:var(--teal)}
+.b-neu{background:var(--cream);color:var(--gray)}
+.comp-row{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:0.5px solid var(--border)}
+.comp-row:last-child{border-bottom:none}
+.comp-row span:first-child{color:var(--gray)}
+.comp-row span:last-child{font-weight:500;color:var(--navy)}
+.star{color:var(--amber)}
+
+/* ── MARCA ── */
+.nome-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-bottom:14px}
+.nome-card{background:var(--white);border:0.5px solid var(--border);border-radius:14px;padding:14px;cursor:pointer;transition:all .18s}
+.nome-card:hover,.nome-card.sel{border:1.5px solid var(--mo);background:var(--mo-lt)}
+.nc-title{font-size:14px;font-weight:500;color:var(--mo-dk);margin-bottom:3px;font-family:'Playfair Display',serif}
+.nc-slogan{font-size:12px;color:var(--gray);font-style:italic;margin-bottom:6px}
+.nc-desc{font-size:12px;color:var(--gray);line-height:1.5}
+.slogan-item{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:10px;background:var(--cream);margin-bottom:6px;cursor:pointer;transition:all .15s;border:0.5px solid transparent}
+.slogan-item.sel{background:var(--mo-lt);border-color:var(--mo)}
+.sl-radio{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.slogan-item.sel .sl-radio{background:var(--mo);border-color:var(--mo)}
+.sl-dot{width:6px;height:6px;border-radius:50%;background:#fff;display:none}
+.slogan-item.sel .sl-dot{display:block}
+.slogan-text{font-size:13px;color:var(--navy);font-style:italic}
+.palette-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.swatch{text-align:center}
+.sw-circle{width:44px;height:44px;border-radius:10px;margin-bottom:4px}
+.sw-name{font-size:9px;color:var(--gray)}
+.sw-hex{font-size:9px;color:var(--gray);font-family:monospace}
+
+/* ── CHART ── */
+.chart-wrap{position:relative;width:100%;margin-bottom:14px}
+.chart-legend{display:flex;gap:16px;margin-bottom:8px;flex-wrap:wrap}
+.cl-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--gray)}
+.cl-sq{width:10px;height:10px;border-radius:2px}
+
+/* ── RELATÓRIO ── */
+.report-section{background:var(--white);border:0.5px solid var(--border);border-radius:14px;padding:18px;margin-bottom:14px}
+.rs-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:12px;border-bottom:0.5px solid var(--border)}
+.rs-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy)}
+.rs-date{font-size:11px;color:var(--gray)}
+.report-metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.rm{background:var(--cream);border-radius:10px;padding:12px}
+.rm-val{font-size:20px;font-weight:500;color:var(--navy)}
+.rm-val.gold{color:var(--gold)}
+.rm-val.teal{color:var(--teal)}
+.rm-val.mo{color:var(--mo)}
+.rm-lbl{font-size:11px;color:var(--gray);margin-top:2px}
+.fase-report-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.fr-card{background:var(--cream);border-radius:10px;padding:12px}
+.fr-name{font-size:12px;font-weight:500;color:var(--navy);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.fr-bar-wrap{height:5px;background:var(--border);border-radius:99px;overflow:hidden;margin-bottom:4px}
+.fr-bar{height:100%;background:var(--mo);border-radius:99px}
+.fr-stat{font-size:11px;color:var(--gray)}
+.pending-list{display:flex;flex-direction:column;gap:6px}
+.pl-item{display:flex;align-items:flex-start;gap:10px;padding:9px 12px;background:var(--cream);border-radius:8px;font-size:12px}
+.pl-tag{font-size:10px;padding:2px 7px;border-radius:99px;white-space:nowrap;flex-shrink:0;margin-top:1px}
+.pl-tag.p{background:var(--amber-lt);color:var(--amber)}
+.pl-tag.r{background:var(--teal-lt);color:var(--teal)}
+.pl-tag.norm{background:var(--mo-lt);color:var(--mo-dk)}
+.pl-text{color:var(--navy);line-height:1.4}
+.btn-primary{background:var(--navy);color:#fff;border:none;padding:9px 18px;border-radius:10px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s}
+.btn-primary:hover{background:#243354}
+.btn-gold{background:var(--gold);color:var(--navy);border:none;padding:9px 18px;border-radius:10px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif}
+.btn-sec{background:transparent;color:var(--navy);border:0.5px solid var(--border);padding:9px 18px;border-radius:10px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.save-toast{font-size:11px;color:var(--teal);text-align:center;height:16px;margin-top:6px;transition:opacity .4s}
+
+/* ── SERVIÇOS ── */
+.serv-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.serv-card{background:var(--white);border:0.5px solid var(--border);border-radius:14px;overflow:hidden}
+.serv-head{padding:10px 14px;font-size:12px;font-weight:500;color:#fff}
+.serv-body{padding:10px 14px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.serv-item{font-size:12px;padding:6px 9px;background:var(--cream);border-radius:8px}
+.serv-item .si-name{font-weight:500;color:var(--navy)}
+.serv-item .si-price{font-size:11px;color:var(--gray);margin-top:1px}
+
+/* ── PARCEIROS ── */
+.partner-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin-bottom:14px}
+.partner-card{background:var(--white);border:0.5px solid var(--border);border-radius:14px;padding:14px}
+.partner-card.priority{border-left:3px solid var(--mo);border-radius:0 14px 14px 0}
+.pc-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
+.pc-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0}
+.av-ob{background:var(--mo-lt);color:var(--mo-dk)}
+.av-pe{background:var(--teal-lt);color:var(--teal)}
+.av-ho{background:var(--amber-lt);color:var(--amber)}
+.av-ub{background:#E6F1FB;color:#0C447C}
+.pc-name{font-size:13px;font-weight:500;color:var(--navy);line-height:1.3}
+.pc-spec{font-size:11px;color:var(--gray);margin-top:1px}
+.pc-badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:99px;font-weight:500;margin-top:4px}
+.pb-ob{background:var(--mo-lt);color:var(--mo-dk)}
+.pb-pe{background:var(--teal-lt);color:var(--teal)}
+.pb-ho{background:var(--amber-lt);color:var(--amber)}
+.pb-ub{background:#E6F1FB;color:#0C447C}
+.pb-pri{background:var(--mo-lt);color:var(--mo-dk);margin-left:4px}
+.pc-why{font-size:11px;color:var(--gray);background:var(--cream);border-radius:8px;padding:6px 9px;margin-top:8px;line-height:1.5}
+.status-btn{display:inline-block;font-size:10px;padding:2px 8px;border-radius:99px;cursor:pointer;border:0.5px solid var(--border);background:var(--cream);color:var(--gray);margin-left:6px;user-select:none}
+.status-btn.contacted{background:var(--amber-lt);color:var(--amber);border-color:var(--amber)}
+.status-btn.scheduled{background:var(--teal-lt);color:var(--teal);border-color:var(--teal)}
+.status-btn.partner{background:var(--mo-lt);color:var(--mo-dk);border-color:var(--mo)}
+.partner-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.pm{background:var(--white);border:0.5px solid var(--border);border-radius:10px;padding:10px 12px;text-align:center}
+.pm-val{font-size:18px;font-weight:500;color:var(--navy)}
+.pm-val.mo{color:var(--mo)}
+.pm-val.teal{color:var(--teal)}
+.pm-lbl{font-size:11px;color:var(--gray);margin-top:2px}
+.filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.fbtn{padding:5px 12px;font-size:11px;border-radius:99px;border:0.5px solid var(--border);background:var(--white);color:var(--gray);cursor:pointer;transition:all .15s}
+.fbtn:hover{border-color:rgba(26,39,64,0.25);color:var(--navy)}
+.fbtn.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.section-label{font-size:11px;font-weight:500;color:var(--gray);text-transform:uppercase;letter-spacing:.8px;margin:14px 0 8px;display:flex;align-items:center;gap:6px}
+.region-dot{width:8px;height:8px;border-radius:50%}
+
+/* ── FOOTER ── */
+.footer{background:var(--navy);padding:24px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:40px}
+.footer-left .logo{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#fff}
+.footer-left .logo span{color:var(--gold)}
+.footer-left .sub{font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
+.footer-right{font-size:11px;color:rgba(255,255,255,0.3);text-align:right}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .page{padding:16px}
+  .hero-metrics{grid-template-columns:1fr 1fr}
+  .fase-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+  .cost-grid,.serv-body,.fase-report-grid{grid-template-columns:1fr}
+  .report-metric-grid{grid-template-columns:1fr 1fr}
+  .comp-grid,.serv-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">
+    <div class="proup-logo">Pro<span>UP</span></div>
+    <div class="nav-divider"></div>
+    <div class="client-name">Morada Fisioterapia — Painel Start</div>
+  </div>
+  <div class="nav-tabs">
+    <button class="ntab on" onclick="goPage('roadmap',this)">Roadmap</button>
+    <button class="ntab" onclick="goPage('financeiro',this)">Financeiro</button>
+    <button class="ntab" onclick="goPage('localizacao',this)">Localização</button>
+    <button class="ntab" onclick="goPage('mercado',this)">Mercado</button>
+    <button class="ntab" onclick="goPage('marca',this)">Marca</button>
+    <button class="ntab" onclick="goPage('servicos',this)">Serviços</button>
+    <button class="ntab" onclick="goPage('parceiros',this)">Parceiros</button>
+    <button class="ntab" onclick="goPage('relatorio',this)">Relatório</button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HERO (global — always visible inside pages)
+══════════════════════════════════════════ -->
+<div id="hero-block" style="padding:20px 28px 0;max-width:1100px;margin:0 auto">
+  <div class="hero">
+    <div class="hero-tag">Pro UP Start · Entregável em andamento</div>
+    <h1 class="hero-title">Clínica <em>Morada</em></h1>
+    <p class="hero-sub">Fisioterapia pélvica · infantil · pós-parto — Zona Oeste, Rio de Janeiro</p>
+    <div class="hero-metrics">
+      <div class="hm">
+        <div class="hm-val gold" id="h-pct">0%</div>
+        <div class="hm-lbl">concluído</div>
+        <div class="prog-bar"><div class="prog-fill" id="h-fill" style="width:0%"></div></div>
+      </div>
+      <div class="hm"><div class="hm-val" id="h-feitos">0</div><div class="hm-lbl">itens feitos</div></div>
+      <div class="hm"><div class="hm-val teal" id="h-fat">R$0</div><div class="hm-lbl">potencial/mês</div></div>
+      <div class="hm"><div class="hm-val" style="color:var(--mo-mid)">R$7.250</div><div class="hm-lbl">invest. inicial est.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ ROADMAP ══ -->
+<div class="page on" id="page-roadmap">
+  <div class="fase-grid" id="fase-grid"></div>
+  <div id="fase-detail"></div>
+  <p class="save-toast" id="toast"></p>
+</div>
+
+<!-- ══════════════════════════════════════════ FINANCEIRO ══ -->
+<div class="page" id="page-financeiro">
+  <div class="calc-card">
+    <div class="cc-title"><span class="cc-title-gold">◆</span> Simulador de faturamento mensal</div>
+    <div class="slider-row">
+      <div class="sl-label">Sessões por sócia / semana</div>
+      <div class="sl-wrap"><input type="range" min="5" max="40" step="1" value="20" id="sl-sess" oninput="calcFin()"><span class="sl-val" id="ov-sess">20</span></div>
+    </div>
+    <div class="slider-row">
+      <div class="sl-label">Valor médio por sessão (R$)</div>
+      <div class="sl-wrap"><input type="range" min="80" max="200" step="5" value="120" id="sl-val" oninput="calcFin()"><span class="sl-val" id="ov-val">R$120</span></div>
+    </div>
+    <div class="slider-row">
+      <div class="sl-label">Sócias ativas</div>
+      <div class="sl-wrap"><input type="range" min="1" max="3" step="1" value="3" id="sl-soc" oninput="calcFin()"><span class="sl-val" id="ov-soc">3</span></div>
+    </div>
+    <div class="slider-row">
+      <div class="sl-label">Taxa de ocupação (%)</div>
+      <div class="sl-wrap"><input type="range" min="30" max="100" step="5" value="70" id="sl-ocup" oninput="calcFin()"><span class="sl-val" id="ov-ocup">70%</span></div>
+    </div>
+    <div class="res-grid">
+      <div class="res-card"><div class="res-val teal" id="r-fat">R$0</div><div class="res-lbl">Faturamento bruto</div></div>
+      <div class="res-card"><div class="res-val" id="r-simples">R$0</div><div class="res-lbl">Simples Nacional (~6%)</div></div>
+      <div class="res-card"><div class="res-val" id="r-pl">R$0</div><div class="res-lbl">Pró-labore total (28%)</div></div>
+      <div class="res-card"><div class="res-val" id="r-res">R$0</div><div class="res-lbl">Reserva (10%)</div></div>
+      <div class="res-card"><div class="res-val green" id="r-disp">R$0</div><div class="res-lbl">Disponível p/ distribuição</div></div>
+      <div class="res-card"><div class="res-val mo" id="r-por">R$0</div><div class="res-lbl">Por sócia (estimado)</div></div>
+    </div>
+  </div>
+
+  <div class="calc-card">
+    <div class="cc-title"><span class="cc-title-gold">◆</span> Custos fixos mensais</div>
+    <div class="cost-grid">
+      <div class="cost-row"><span>Sublocação de sala</span><span>R$1.400</span></div>
+      <div class="cost-row"><span>ProUP! Contabilidade</span><span>R$450</span></div>
+      <div class="cost-row"><span>Prontuário / agendamento</span><span>R$90</span></div>
+      <div class="cost-row"><span>Marketing digital</span><span>R$300</span></div>
+      <div class="cost-row"><span>Internet + Google Workspace</span><span>R$120</span></div>
+      <div class="cost-row"><span>Maquininha + taxas</span><span>R$80</span></div>
+      <div class="cost-row total"><span>Total fixo estimado</span><span>R$2.440</span></div>
+      <div class="cost-row total"><span>Ponto de equilíbrio</span><span id="pe-val">~21 sessões/mês</span></div>
+    </div>
+  </div>
+
+  <div class="calc-card">
+    <div class="cc-title"><span class="cc-title-gold">◆</span> Investimento inicial detalhado</div>
+    <div class="cost-grid">
+      <div class="cost-row"><span>Abertura da PJ (honorários)</span><span>R$600</span></div>
+      <div class="cost-row"><span>Registro CREFITO-PJ</span><span>R$350</span></div>
+      <div class="cost-row"><span>Alvará + Vigilância Sanitária</span><span>R$1.300</span></div>
+      <div class="cost-row"><span>Maca fisioterapia</span><span>R$700</span></div>
+      <div class="cost-row"><span>Tatame + bolas + rolos</span><span>R$400</span></div>
+      <div class="cost-row"><span>TENS/FES eletroestimulação</span><span>R$1.200</span></div>
+      <div class="cost-row"><span>Materiais sensoriais infantis</span><span>R$500</span></div>
+      <div class="cost-row"><span>Identidade visual (designer)</span><span>R$500</span></div>
+      <div class="cost-row"><span>Ensaio fotográfico</span><span>R$800</span></div>
+      <div class="cost-row"><span>Mobiliário básico</span><span>R$1.000</span></div>
+      <div class="cost-row total"><span>Total estimado</span><span>R$7.350</span></div>
+      <div class="cost-row total"><span>Por sócia (÷3)</span><span>R$2.450</span></div>
+    </div>
+  </div>
+
+  <div class="calc-card">
+    <div class="cc-title"><span class="cc-title-gold">◆</span> Projeção de crescimento — Jul/2026 a Jun/2027</div>
+    <div class="chart-legend">
+      <div class="cl-item"><div class="cl-sq" style="background:#8B5E52"></div>Faturamento</div>
+      <div class="cl-item"><div class="cl-sq" style="background:#1D9E75"></div>Líquido estimado</div>
+      <div class="cl-item"><div class="cl-sq" style="background:#BA7517;opacity:.6"></div>Ponto de equilíbrio</div>
+    </div>
+    <div class="chart-wrap" style="height:220px"><canvas id="chart-proj" role="img" aria-label="Projeção de faturamento de julho 2026 a junho 2027, crescendo de R$3.600 até R$18.000">Projeção de crescimento da clínica.</canvas></div>
+  </div>
+
+  <div class="calc-card">
+    <div class="cc-title"><span class="cc-title-gold">◆</span> Metas financeiras — linha do tempo</div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div class="cost-row"><span>🎯 Meta 1 — Abrir a PJ</span><span style="color:var(--mo)">Capital inicial</span></div>
+      <div class="cost-row"><span>🎯 Meta 2 — Pagar ProUP!</span><span style="color:var(--gray)">1º mês operação</span></div>
+      <div class="cost-row"><span>🎯 Meta 3 — Ensaio fotográfico</span><span style="color:var(--gray)">2º mês</span></div>
+      <div class="cost-row"><span>🎯 Meta 4 — Consultório próprio</span><span style="color:var(--gray)">Mês 12–18</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ LOCALIZAÇÃO ══ -->
+<div class="page" id="page-localizacao">
+  <div style="background:var(--mo-lt);border:0.5px solid var(--mo-mid);border-radius:12px;padding:12px 16px;margin-bottom:14px;font-size:12px;color:var(--mo-dk);line-height:1.6">
+    <strong style="display:block;margin-bottom:4px">Recomendação ProUP! Start</strong>
+    Valqueire é a localização prioritária — oferta de fisioterapia pélvica e infantil é baixa, há uma maternidade a poucos metros (Casa de Saúde e Maternidade RJ, Rua das Tulipas, 209), e o Hospital Estadual da Criança (Rua Luiz Beltrão, 147) é referência em pediatria na região.
+  </div>
+  <div class="comp-grid">
+    <div class="comp-card rec">
+      <div class="comp-name">Valqueire</div>
+      <div class="comp-badge b-rec">Recomendada</div>
+      <div class="comp-row"><span>Perfil público</span><span>Classe B/C</span></div>
+      <div class="comp-row"><span>Aluguel sala/mês</span><span>R$1.200–1.800</span></div>
+      <div class="comp-row"><span>Concorrência fisio</span><span>Moderada</span></div>
+      <div class="comp-row"><span>Fisio pélvica na região</span><span>Baixa oferta</span></div>
+      <div class="comp-row"><span>Fisio infantil na região</span><span>Baixa oferta</span></div>
+      <div class="comp-row"><span>Ticket médio viável</span><span>R$110–150</span></div>
+      <div class="comp-row"><span>Acesso transporte</span><span>Bom</span></div>
+      <div class="comp-row"><span>Potencial parcerias</span><span class="star">★★★★</span></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-name">Madureira</div>
+      <div class="comp-badge b-neu">Alta densidade</div>
+      <div class="comp-row"><span>Perfil público</span><span>Classe C/D</span></div>
+      <div class="comp-row"><span>Aluguel sala/mês</span><span>R$800–1.400</span></div>
+      <div class="comp-row"><span>Concorrência fisio</span><span>Alta</span></div>
+      <div class="comp-row"><span>Fisio pélvica na região</span><span>Média oferta</span></div>
+      <div class="comp-row"><span>Fisio infantil na região</span><span>Média oferta</span></div>
+      <div class="comp-row"><span>Ticket médio viável</span><span>R$80–110</span></div>
+      <div class="comp-row"><span>Acesso transporte</span><span>Excelente</span></div>
+      <div class="comp-row"><span>Potencial parcerias</span><span class="star">★★★</span></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-name">Sulacap</div>
+      <div class="comp-badge b-neu">Emergente</div>
+      <div class="comp-row"><span>Perfil público</span><span>Classe B/C</span></div>
+      <div class="comp-row"><span>Aluguel sala/mês</span><span>R$900–1.500</span></div>
+      <div class="comp-row"><span>Concorrência fisio</span><span>Baixa</span></div>
+      <div class="comp-row"><span>Fisio pélvica na região</span><span>Muito baixa</span></div>
+      <div class="comp-row"><span>Fisio infantil na região</span><span>Muito baixa</span></div>
+      <div class="comp-row"><span>Ticket médio viável</span><span>R$100–130</span></div>
+      <div class="comp-row"><span>Acesso transporte</span><span>Regular</span></div>
+      <div class="comp-row"><span>Potencial parcerias</span><span class="star">★★★</span></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-name">Barra da Tijuca</div>
+      <div class="comp-badge b-neu">Alto padrão</div>
+      <div class="comp-row"><span>Perfil público</span><span>Classe A/B</span></div>
+      <div class="comp-row"><span>Aluguel sala/mês</span><span>R$2.500–5.000</span></div>
+      <div class="comp-row"><span>Concorrência fisio</span><span>Muito alta</span></div>
+      <div class="comp-row"><span>Fisio pélvica na região</span><span>Alta oferta</span></div>
+      <div class="comp-row"><span>Fisio infantil na região</span><span>Alta oferta</span></div>
+      <div class="comp-row"><span>Ticket médio viável</span><span>R$180–300</span></div>
+      <div class="comp-row"><span>Acesso transporte</span><span>Limitado</span></div>
+      <div class="comp-row"><span>Potencial parcerias</span><span class="star">★★</span></div>
+    </div>
+  </div>
+  <div class="calc-card">
+    <div class="cc-title"><span class="cc-title-gold">◆</span> Radar de viabilidade por região</div>
+    <div class="chart-legend">
+      <div class="cl-item"><div class="cl-sq" style="background:#1D9E75"></div>Valqueire</div>
+      <div class="cl-item"><div class="cl-sq" style="background:#8B5E52"></div>Madureira</div>
+      <div class="cl-item"><div class="cl-sq" style="background:#BA7517"></div>Sulacap</div>
+      <div class="cl-item"><div class="cl-sq" style="background:#888"></div>Barra</div>
+    </div>
+    <div class="chart-wrap" style="height:260px"><canvas id="chart-radar" role="img" aria-label="Radar comparando as 4 regiões em custo, demanda, concorrência, acessibilidade e parcerias">Comparativo de viabilidade das regiões.</canvas></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ MERCADO ══ -->
+<div class="page" id="page-mercado">
+  <div class="comp-grid">
+    <div class="comp-card rec">
+      <div class="comp-name">Clínica Morada</div>
+      <div class="comp-badge b-rec">Nosso posicionamento</div>
+      <div class="comp-row"><span>Especialidade</span><span>Pélvica + Infantil</span></div>
+      <div class="comp-row"><span>Ticket sessão</span><span>R$110–150</span></div>
+      <div class="comp-row"><span>Diferencial</span><span>Acolhimento</span></div>
+      <div class="comp-row"><span>Projeto social</span><span>✓ Sim</span></div>
+      <div class="comp-row"><span>Cursos/palestras</span><span>✓ Sim (futuro)</span></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-name">Clínica Fox</div>
+      <div class="comp-badge b-neu">Valqueire</div>
+      <div class="comp-row"><span>Especialidade</span><span>Geral</span></div>
+      <div class="comp-row"><span>Ticket sessão</span><span>R$100–160</span></div>
+      <div class="comp-row"><span>Diferencial</span><span>Estrutura física</span></div>
+      <div class="comp-row"><span>Projeto social</span><span>Não</span></div>
+      <div class="comp-row"><span>Cursos/palestras</span><span>Não</span></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-name">Avanfisio</div>
+      <div class="comp-badge b-neu">Realengo</div>
+      <div class="comp-row"><span>Especialidade</span><span>Geral + Ortopedia</span></div>
+      <div class="comp-row"><span>Ticket sessão</span><span>R$90–140</span></div>
+      <div class="comp-row"><span>Diferencial</span><span>Preço</span></div>
+      <div class="comp-row"><span>Projeto social</span><span>Não</span></div>
+      <div class="comp-row"><span>Cursos/palestras</span><span>Não</span></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-name">Clínicas de Convênio</div>
+      <div class="comp-badge b-neu">Região geral</div>
+      <div class="comp-row"><span>Especialidade</span><span>Geral</span></div>
+      <div class="comp-row"><span>Ticket sessão</span><span>Coberto por plano</span></div>
+      <div class="comp-row"><span>Diferencial</span><span>Convênio</span></div>
+      <div class="comp-row"><span>Projeto social</span><span>Não</span></div>
+      <div class="comp-row"><span>Cursos/palestras</span><span>Não</span></div>
+    </div>
+  </div>
+  <div class="calc-card">
+    <div class="cc-title"><span class="cc-title-gold">◆</span> Oferta de fisioterapia especializada — Zona Oeste RJ</div>
+    <div class="chart-legend">
+      <div class="cl-item"><div class="cl-sq" style="background:#8B5E52"></div>Fisio pélvica</div>
+      <div class="cl-item"><div class="cl-sq" style="background:#1D9E75"></div>Fisio infantil</div>
+    </div>
+    <div class="chart-wrap" style="height:200px"><canvas id="chart-mercado" role="img" aria-label="Oferta de fisioterapia especializada por bairro na zona oeste do Rio de Janeiro">Oferta por região.</canvas></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ MARCA ══ -->
+<div class="page" id="page-marca">
+  <div class="calc-card">
+    <div class="cc-title"><span class="cc-title-gold">◆</span> Escolha o nome da marca</div>
+    <div class="nome-grid" id="nome-grid"></div>
+  </div>
+  <div class="calc-card">
+    <div class="cc-title"><span class="cc-title-gold">◆</span> Escolha o slogan principal</div>
+    <div id="slogan-list"></div>
+  </div>
+  <div class="calc-card">
+    <div class="cc-title"><span class="cc-title-gold">◆</span> Paleta de cores aprovada</div>
+    <div class="palette-row">
+      <div class="swatch"><div class="sw-circle" style="background:#8B5E52"></div><div class="sw-name">Terracota</div><div class="sw-hex">#8B5E52</div></div>
+      <div class="swatch"><div class="sw-circle" style="background:#C49A8E"></div><div class="sw-name">Rosa areia</div><div class="sw-hex">#C49A8E</div></div>
+      <div class="swatch"><div class="sw-circle" style="background:#F2E8E5"></div><div class="sw-name">Bege claro</div><div class="sw-hex">#F2E8E5</div></div>
+      <div class="swatch"><div class="sw-circle" style="background:#5C7A6B"></div><div class="sw-name">Verde oliva</div><div class="sw-hex">#5C7A6B</div></div>
+      <div class="swatch"><div class="sw-circle" style="background:#F7F3F0"></div><div class="sw-name">Off-white</div><div class="sw-hex">#F7F3F0</div></div>
+      <div class="swatch"><div class="sw-circle" style="background:#3D2B27"></div><div class="sw-name">Marrom esc.</div><div class="sw-hex">#3D2B27</div></div>
+    </div>
+    <div style="font-size:12px;color:var(--gray);margin-top:4px">
+      Tipografia: <strong style="color:var(--navy)">Playfair Display</strong> (títulos) + <strong style="color:var(--navy)">Lato</strong> (corpo)
+    </div>
+  </div>
+  <div class="btn-row">
+    <button class="btn-primary" onclick="window.open('https://proup.com.br','_blank')">Ver briefing completo de marca (PPTX)</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ SERVIÇOS ══ -->
+<div class="page" id="page-servicos">
+  <div class="serv-grid">
+    <div class="serv-card">
+      <div class="serv-head" style="background:var(--mo)">Serviços clínicos</div>
+      <div class="serv-body">
+        <div class="serv-item"><div class="si-name">Fisioterapia pélvica</div><div class="si-price">Avulso R$120 · Pack 8x R$840</div></div>
+        <div class="serv-item"><div class="si-name">Fisioterapia infantil</div><div class="si-price">Avulso R$120 · Pack 8x R$840</div></div>
+        <div class="serv-item"><div class="si-name">Fisioterapia pós-parto</div><div class="si-price">Avulso R$120 · Pack 4x R$440</div></div>
+        <div class="serv-item"><div class="si-name">Avaliação inicial</div><div class="si-price">R$150–180</div></div>
+      </div>
+    </div>
+    <div class="serv-card">
+      <div class="serv-head" style="background:var(--sage)">Educação continuada</div>
+      <div class="serv-body">
+        <div class="serv-item"><div class="si-name">Palestras para médicos</div><div class="si-price">Gratuita (captação) ou R$200–500</div></div>
+        <div class="serv-item"><div class="si-name">Workshops para profissionais</div><div class="si-price">R$350–800/participante</div></div>
+        <div class="serv-item"><div class="si-name">Curso online (futuro)</div><div class="si-price">R$200–600/aluno</div></div>
+        <div class="serv-item"><div class="si-name">Grupos de mães</div><div class="si-price">R$60–120/pessoa (grupos 6–10)</div></div>
+      </div>
+    </div>
+    <div class="serv-card">
+      <div class="serv-head" style="background:var(--mo-mid)">Projeto social</div>
+      <div class="serv-body">
+        <div class="serv-item"><div class="si-name">Vagas sociais (2/semana)</div><div class="si-price">50% do valor ou gratuito (UBS)</div></div>
+        <div class="serv-item"><div class="si-name">Saúde nas escolas</div><div class="si-price">Parceria com escolas públicas</div></div>
+        <div class="serv-item"><div class="si-name">Conteúdo educativo</div><div class="si-price">Instagram + YouTube</div></div>
+        <div class="serv-item"><div class="si-name">Atendimento domiciliar</div><div class="si-price">Futuro — mobilidade reduzida</div></div>
+      </div>
+    </div>
+    <div class="serv-card">
+      <div class="serv-head" style="background:var(--navy)">Convênios e parcerias</div>
+      <div class="serv-body">
+        <div class="serv-item"><div class="si-name">Atendimento particular</div><div class="si-price">Piso e teto — flexível</div></div>
+        <div class="serv-item"><div class="si-name">Liminares judiciais</div><div class="si-price">Tabela específica</div></div>
+        <div class="serv-item"><div class="si-name">Parcerias com planos</div><div class="si-price">A estudar (Amil, Unimed)</div></div>
+        <div class="serv-item"><div class="si-name">Credenciamento Prefeitura</div><div class="si-price">A estudar (Carioca Digital)</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ PARCEIROS ══ -->
+<div class="page" id="page-parceiros">
+  <div class="partner-metrics">
+    <div class="pm"><div class="pm-val" id="pm-total">13</div><div class="pm-lbl">mapeados</div></div>
+    <div class="pm"><div class="pm-val mo" id="pm-cont">0</div><div class="pm-lbl">contatados</div></div>
+    <div class="pm"><div class="pm-val" style="color:var(--amber)" id="pm-agen">0</div><div class="pm-lbl">agendados</div></div>
+    <div class="pm"><div class="pm-val teal" id="pm-part">0</div><div class="pm-lbl">parceiros ativos</div></div>
+  </div>
+  <div class="filter-row">
+    <button class="fbtn on" onclick="filterPartners('todos',this)">Todos</button>
+    <button class="fbtn" onclick="filterPartners('obstetra',this)">Gineco/Obstetra</button>
+    <button class="fbtn" onclick="filterPartners('pediatra',this)">Pediatra</button>
+    <button class="fbtn" onclick="filterPartners('hospital',this)">Hospital/Maternidade</button>
+    <button class="fbtn" onclick="filterPartners('ubs',this)">UBS / SUS</button>
+  </div>
+  <div class="section-label"><div class="region-dot" style="background:var(--mo)"></div>Valqueire</div>
+  <div class="partner-grid" id="pg-valqueire"></div>
+  <div class="section-label"><div class="region-dot" style="background:var(--teal)"></div>Madureira</div>
+  <div class="partner-grid" id="pg-madureira"></div>
+</div>
+
+<!-- ══════════════════════════════════════════ RELATÓRIO ══ -->
+<div class="page" id="page-relatorio">
+  <div class="report-section">
+    <div class="rs-header">
+      <div>
+        <div class="rs-title">Relatório de progresso</div>
+        <div style="font-size:12px;color:var(--gray);margin-top:2px">Clínica Morada · Mentoria ProUP! Start</div>
+      </div>
+      <div class="rs-date" id="rep-date"></div>
+    </div>
+    <div class="report-metric-grid">
+      <div class="rm"><div class="rm-val gold" id="rep-pct">0%</div><div class="rm-lbl">concluído geral</div></div>
+      <div class="rm"><div class="rm-val mo" id="rep-feitos">0</div><div class="rm-lbl">itens concluídos</div></div>
+      <div class="rm"><div class="rm-val teal" id="rep-fases">0/7</div><div class="rm-lbl">fases iniciadas</div></div>
+      <div class="rm"><div class="rm-val" id="rep-pend">0</div><div class="rm-lbl">ações prioritárias</div></div>
+    </div>
+    <div style="font-size:13px;font-weight:500;color:var(--navy);margin-bottom:8px">Progresso por fase</div>
+    <div class="fase-report-grid" id="rep-fases-grid"></div>
+    <div style="font-size:13px;font-weight:500;color:var(--navy);margin:12px 0 8px">Ações prioritárias pendentes</div>
+    <div class="pending-list" id="rep-pending"></div>
+    <div style="font-size:13px;font-weight:500;color:var(--navy);margin:12px 0 8px">Decisões de marca</div>
+    <div style="font-size:12px;color:var(--gray);padding:10px 12px;background:var(--cream);border-radius:8px" id="rep-marca">—</div>
+    <div style="margin-top:16px;padding:12px 16px;background:var(--navy);border-radius:10px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:14px;color:#fff">Pro<span style="color:var(--gold)">UP</span>! Soluções Empresariais</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:1px">Mentoria Pro UP Start — documento confidencial</div>
+      </div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.3)" id="rep-footer-date"></div>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button class="btn-gold" onclick="buildReport()">↺ Atualizar relatório</button>
+    <button class="btn-primary" onclick="window.print()">Imprimir / Salvar PDF</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ FOOTER ══ -->
+<div class="footer">
+  <div class="footer-left">
+    <div class="logo">Pro<span>UP</span>! Soluções Empresariais</div>
+    <div class="sub">Pro UP Start · Entregável cliente Morada Fisioterapia</div>
+  </div>
+  <div class="footer-right">Painel interativo · Progresso salvo no navegador<br>© 2026 ProUP! — uso exclusivo do cliente</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+// ═══════════════════════════ DATA ═══════════════════════════
+const SK = 'morada_v4';
+const MO='#8B5E52', TEAL='#1D9E75', AMBER='#BA7517', SAGE='#5C7A6B', NAVY='#1a2740';
+
+const FASES=[
+  {id:'f1',nome:'Jurídico & Abertura',icon:'⚖️',itens:[
+    {id:'f1_1',t:'Definir tipo societário (Ltda. com fins lucrativos)',d:'Sociedade Limitada recomendada para 3 sócias com objetivo de crescimento e fins lucrativos.',p:true},
+    {id:'f1_2',t:'Escolher CNAEs principal e secundários',d:'Principal: 8699-0/03 (Fisioterapia). Secundários: 8599-6/04 (Treinamentos), 8630-5/06 (Serviços de saúde).',p:true},
+    {id:'f1_3',t:'Simples Nacional — garantir Fator R',d:'Pró-labore total ≥ 28% da RBT para enquadramento no Anexo III (alíquota inicial 6%). Monitorar mensalmente.',p:true,r:true},
+    {id:'f1_4',t:'Nomear responsável técnica (RT) no CREFITO-2',d:'Uma das sócias assume a RT. Necessário para o registro da PJ no CREFITO-2 (RJ).'},
+    {id:'f1_5',t:'Registrar a PJ no CREFITO-2',d:'Taxa de registro da pessoa jurídica. Documentos: contrato social, CNPJ, RG/CPF dos sócios.'},
+    {id:'f1_6',t:'Alvará de funcionamento — Portal Carioca Digital',d:'Prazo médio 15–30 dias úteis. Fazer junto com abertura do CNPJ.'},
+    {id:'f1_7',t:'Licença da Vigilância Sanitária municipal',d:'Autorização de Funcionamento (AF) + Licença de Funcionamento (LF). Clínicas de fisio precisam de licença Visa.',p:true},
+    {id:'f1_8',t:'Contrato social — cláusulas essenciais',d:'Cotas de cada sócia, competências, pró-labore, cláusula de saída e de não-concorrência.',p:true},
+    {id:'f1_9',t:'Abrir conta PJ conjunta (3 sócias)',d:'Nubank PJ, Inter PJ ou C6 Bank — sem tarifas iniciais. Acesso compartilhado via app.',r:true},
+    {id:'f1_10',t:'Registrar marca no INPI (Classe 44)',d:'Inicia já para proteger o nome "Morada Fisioterapia". Prazo de 12–18 meses para conclusão.'}
+  ]},
+  {id:'f2',nome:'Localização & Espaço',icon:'📍',itens:[
+    {id:'f2_1',t:'Visitar mínimo 3 salas em Valqueire',d:'Verificar: acessibilidade para criança e gestante, tomadas 220V, banheiro com privacidade.',p:true},
+    {id:'f2_2',t:'Verificar metragem mínima Visa (RDC 50/2002)',d:'Sala de fisioterapia individual mínimo 9m². Com equipamentos, ideal 15–20m².'},
+    {id:'f2_3',t:'Negociar e registrar contrato em nome da PJ',d:'O contrato de sublocação deve estar no CNPJ da clínica para abatimento fiscal.',r:true},
+    {id:'f2_4',t:'Confirmar infraestrutura elétrica (TENS/FES = 220V)',d:'Verificar antes de fechar o contrato — necessário para os equipamentos de eletroestimulação.'},
+    {id:'f2_5',t:'Mapear raio de 2km: maternidades e pediatras',d:'Lista de médicos para visita de apresentação. Base para estratégia de parcerias (ver aba Parceiros).'},
+    {id:'f2_6',t:'Planejar layout da sala',d:'Zona adulto (maca, cadeira) separada da zona infantil (tatame, brinquedos terapêuticos). Iluminação quente.'}
+  ]},
+  {id:'f3',nome:'Financeiro & Tributário',icon:'💰',itens:[
+    {id:'f3_1',t:'Definir capital social inicial',d:'Mínimo R$3.000 a R$10.000, dividido entre as 3 sócias.',p:true,r:true},
+    {id:'f3_2',t:'Montar DRE do mês 1 (com ProUP!)',d:'Faturamento previsto − Simples − Pró-labore − Custos fixos = Lucro distribuível.',p:true,r:true},
+    {id:'f3_3',t:'Definir pró-labore de cada sócia',d:'Fator R: pró-labore ≥ 28% da RBT. Sugestão inicial: R$1.518/sócia (1x salário mínimo).',p:true,r:true},
+    {id:'f3_4',t:'Criar reserva de caixa (10% ao mês)',d:'Reservar 10% do faturamento bruto antes da distribuição. Meta: 3 meses de custo fixo em reserva.'},
+    {id:'f3_5',t:'Definir sistema de pagamentos',d:'InfinitePay ou Ton (menores taxas). PIX sem taxas. Parcelar em até 12x para pacotes.'},
+    {id:'f3_6',t:'Abrir conta poupança PJ para reservas',d:'Separar da conta corrente operacional.',r:true},
+    {id:'f3_7',t:'Acompanhar metas financeiras (linha do tempo)',d:'M1: pagar custos fixos. M3: ProUP!. M6: ensaio fotográfico. M12: consultório próprio.',p:true},
+    {id:'f3_8',t:'Definir política de reembolso e convênios',d:'Reembolso: laudo + NFS-e. Convênios grandes: prazo 60–90 dias e credenciamento.'}
+  ]},
+  {id:'f4',nome:'Marca & Marketing',icon:'🎨',itens:[
+    {id:'f4_1',t:'Contratar designer com o briefing ProUP!',d:'Usar o briefing de identidade visual gerado (PPTX). Investimento: R$500 (identidade essencial).',p:true},
+    {id:'f4_2',t:'Registrar @moradafisioterapia.rj no Instagram',d:'Verificar disponibilidade agora. Alternativa: @moradafisio.rj'},
+    {id:'f4_3',t:'Criar e verificar Google Meu Negócio',d:'Essencial para aparecer em "fisioterapia perto de mim". Adicionar fotos, horários e WhatsApp.',p:true},
+    {id:'f4_4',t:'Montar folder de apresentação para médicos',d:'1 página: especialidades, como encaminhar, QR code para WhatsApp. ProUP! apoia na estrutura.',p:true},
+    {id:'f4_5',t:'Criar agenda de visitas a consultórios',d:'Meta: 10 visitas no 1º mês. Obstetras, ginecologistas e pediatras em Valqueire e Madureira.'},
+    {id:'f4_6',t:'Estratégia de conteúdo no Instagram',d:'3x/semana: dicas de saúde pélvica, desenvolvimento infantil, bastidores. Dividir entre as sócias.'},
+    {id:'f4_7',t:'Criar link de agendamento',d:'WhatsApp Business com mensagem automática. Futuro: Doctoralia ou Nilo Saúde.'},
+    {id:'f4_8',t:'Realizar ensaio fotográfico profissional',d:'R$800. Fotos das sócias, da sala e de atendimento. Essencial para credibilidade online.'}
+  ]},
+  {id:'f5',nome:'Operação & Protocolos',icon:'📋',itens:[
+    {id:'f5_1',t:'Definir papéis de cada sócia',d:'Gestora administrativa (financeiro+contratos), gestora clínica (protocolos+qualidade), gestora de marketing.',p:true},
+    {id:'f5_2',t:'Criar Google Drive compartilhado',d:'Estrutura: /Pacientes · /Financeiro · /Marketing · /Jurídico · /Protocolos · /Reuniões'},
+    {id:'f5_3',t:'Protocolo de avaliação — fisioterapia pélvica',d:'Anamnese + avaliação funcional + escala de dor + objetivos. Padronizar para as 3 sócias.'},
+    {id:'f5_4',t:'Protocolo de avaliação — fisioterapia infantil',d:'Anamnese (pais) + escala de desenvolvimento (AIMS/Alberta) + objetivos. Versão simplificada para pais.'},
+    {id:'f5_5',t:'Protocolo de plano de tratamento',d:'Objetivos SMART + técnicas + frequência + critérios de alta + reavaliação a cada 8 sessões.'},
+    {id:'f5_6',t:'Sistema de prontuário eletrônico',d:'iClinic (R$79/mês), ProntMed ou Google Forms adaptado. LGPD: termo de consentimento obrigatório.'},
+    {id:'f5_7',t:'Política de cancelamento e reagendamento',d:'24h de antecedência sem cobrança. Definir política específica para pacotes.'},
+    {id:'f5_8',t:'Reuniões semanais — toda quarta 20h30',d:'Pauta fixa: financeiro (15min) · clínico (15min) · marketing (10min) · administrativo (10min). Ata no Drive.'}
+  ]},
+  {id:'f6',nome:'Educação & Cursos',icon:'🎓',itens:[
+    {id:'f6_1',t:'Definir primeiro workshop ou palestra',d:'Sugestão: "Fisioterapia pélvica no pós-parto — o que toda obstetra precisa saber". Gratuita para médicos.',p:true},
+    {id:'f6_2',t:'Agenda de palestras — 2 no 1º trimestre',d:'Solicitar espaço em consultórios médicos parceiros para apresentação de 30 min.'},
+    {id:'f6_3',t:'Planejar grupos de mães',d:'Autocuidado pós-parto, amamentação, retorno ao exercício. Grupos de 6–10. R$80–120/encontro.'},
+    {id:'f6_4',t:'Estruturar curso presencial para fisioterapeutas',d:'Tema: avaliação e tratamento do assoalho pélvico. 16h presenciais. R$600–1.200/aluno.'},
+    {id:'f6_5',t:'Planejar curso online (fase 2 — após 6 meses)',d:'Gravar conteúdo em módulos. Plataformas: Hotmart, Eduzz ou Kiwify.'},
+    {id:'f6_6',t:'Programas de saúde nas escolas',d:'Parceria com escolas municipais de Valqueire/Madureira sobre ergonomia infantil e saúde postural.'}
+  ]},
+  {id:'f7',nome:'Impacto Social',icon:'🤝',itens:[
+    {id:'f7_1',t:'Definir política de vagas sociais',d:'2 vagas/semana: 50% do valor para indicações de UBS, ou gratuito para casos de vulnerabilidade severa.',p:true},
+    {id:'f7_2',t:'Parceria com UBS de Valqueire e Madureira',d:'Visitar as UBS e apresentar a clínica. Criar canal de encaminhamento formal.'},
+    {id:'f7_3',t:'Parceria com maternidades públicas',d:'HM Herculano Pinheiro (Madureira) e HM Carmela Dutra. Encaminhamento de puérperas e bebês de risco.'},
+    {id:'f7_4',t:'Comunicar o impacto social como diferencial de marca',d:'Publicar no Instagram os atendimentos sociais (sem identificar pacientes). Gera confiança e autoridade.'},
+    {id:'f7_5',t:'Projeto de educação em saúde nas escolas',d:'Levar fisioterapeutas para escolas: postura, desenvolvimento motor, saúde da mulher na adolescência.'}
+  ]}
+];
+
+const NOMES=[
+  {n:'Morada Fisioterapia',slogan:'"Cuidar é acolher."',d:'Nome original já construído. Remete a casa, aconchego e pertencimento. Ideal para o posicionamento humanizado.'},
+  {n:'Instituto Morada',slogan:'"Onde o cuidado tem lugar."',d:'Transmite autoridade. Abre espaço para cursos e educação continuada sem restringir à fisioterapia.'},
+  {n:'Morada Saúde',slogan:'"Seu corpo, sua morada."',d:'Mais amplo — permite futuro com outras especialidades (psicologia, nutrição, equipe multidisciplinar).'},
+  {n:'Clínica Morada',slogan:'"Cuidando de quem cuida e de quem cresce."',d:'Claro e direto. Facilita indexação no Google e reconhecimento rápido de serviço de saúde.'}
+];
+
+const SLOGANS=['Cuidar é acolher.','Onde o cuidado tem lugar.','Seu corpo, sua morada.','Cuidando de quem cuida e de quem cresce.','Fisioterapia com técnica, afeto e propósito.'];
+
+const PARCEIROS=[
+  {id:'p1',tipo:'hospital',nome:'Hospital Estadual da Criança (HEC)',spec:'Hospital pediátrico — UTI neonatal e pediátrica',end:'R. Luiz Beltrão, 147 — Valqueire',regiao:'Valqueire',priority:true,porque:'Referência pediátrica em Valqueire. Encaminha bebês de UTI neonatal para acompanhamento ambulatorial — exatamente o que a Morada faz.'},
+  {id:'p2',tipo:'hospital',nome:'Casa de Saúde e Maternidade RJ',spec:'Maternidade particular — partos e pré-natal',end:'R. das Tulipas, 209 — Valqueire',regiao:'Valqueire',priority:true,porque:'Maternidade a poucos metros de onde deve ser a clínica. Puérperas saindo com indicação de fisio pós-parto = fluxo direto.'},
+  {id:'p3',tipo:'obstetra',nome:'Ginecologistas/Obstetras — R. Luís Beltrão, 160',spec:'Consultórios particulares credenciados Amil',end:'R. Luis Beltrão, 160 sl 311 — Valqueire',regiao:'Valqueire',priority:true,porque:'Obstetras credenciados por planos em Valqueire. Encaminham gestantes e puérperas — público exato da fisio pélvica.'},
+  {id:'p4',tipo:'obstetra',nome:'Ginecologistas — Praça Saiqui, 42',spec:'Consultório particular — Valqueire',end:'Pça. Saiqui, 42 sl 405 — Valqueire',regiao:'Valqueire',priority:false,porque:'Consultório ginecológico em Valqueire. Canal para encaminhar pacientes com queixa pélvica (endometriose, disfunções).'},
+  {id:'p5',tipo:'obstetra',nome:'Dra. Beatriz Rodrigues Abreu da Costa',spec:'Ginecologista e obstetra — Unimed Valqueire',end:'Vila Valqueire — RJ',regiao:'Valqueire',priority:false,porque:'Gineco/obstetra credenciada pela Unimed em Valqueire. Relevante para pacientes que chegam pelo convênio.'},
+  {id:'p6',tipo:'hospital',nome:'HM Herculano Pinheiro',spec:'Maternidade municipal — alto volume SUS',end:'Av. Ministro Edgard Romero, 276 — Madureira',regiao:'Madureira',priority:true,porque:'Maternidade pública com alto volume. Público classe C/D — ideal para as vagas sociais. Propor encaminhamento de puérperas.'},
+  {id:'p7',tipo:'hospital',nome:'HM Carmela Dutra',spec:'Maternidade municipal — Lins de Vasconcelos',end:'R. Aquidabã, 1037 — Lins de Vasconcelos',regiao:'Madureira',priority:false,porque:'Maternidade próxima ao eixo Madureira/Valqueire. Canal para bebês de risco e fisio infantil.'},
+  {id:'p8',tipo:'obstetra',nome:'Clínica Rio Norte Saúde',spec:'Multiespecialidade — gineco, obstetrícia, pediatria',end:'R. Dagmar de Fonseca, 117 — Madureira',regiao:'Madureira',priority:true,porque:'Clínica focada em pacientes sem plano — exatamente o perfil da Morada. Têm gineco, obstetrícia e pediatria. Parceria natural.'},
+  {id:'p9',tipo:'pediatra',nome:'Dra. Karina Brunini — Pediatria e Vacinação',spec:'Pediatra com +183 avaliações no Doctoralia',end:'Estr. do Portela, 99 sl 412 — Madureira',regiao:'Madureira',priority:true,porque:'Pediatra muito bem avaliada, foco em desenvolvimento e nutrologia. Alto volume de pacientes = muitas crianças para fisio infantil.'},
+  {id:'p10',tipo:'pediatra',nome:'Centro Médico — Est. do Portela, 99',spec:'Polo com múltiplos pediatras',end:'Estr. do Portela, 99 (salas 1004/1005) — Madureira',regiao:'Madureira',priority:false,porque:'Polo médico com vários pediatras no mesmo endereço. Uma visita pode converter múltiplos encaminhadores.'},
+  {id:'p11',tipo:'pediatra',nome:'Pediatras — R. Carolina Machado, 380',spec:'Consultório de pediatria — Madureira',end:'R. Carolina Machado, 380 sl 203 — Madureira',regiao:'Madureira',priority:false,porque:'Consultório pediátrico em Madureira. Perfil classe C — alinhado com o público-alvo da Morada.'},
+  {id:'p12',tipo:'ubs',nome:'UBS Valqueire',spec:'Unidade Básica de Saúde — encaminhamentos SUS',end:'Vila Valqueire — RJ (buscar no CNES)',regiao:'Valqueire',priority:false,porque:'Fonte de pacientes para as vagas sociais. Propor parceria de encaminhamento de gestantes e crianças com indicação de fisio.'},
+  {id:'p13',tipo:'ubs',nome:'UBS Madureira',spec:'Unidade Básica de Saúde — alto volume',end:'Madureira — RJ (buscar no CNES)',regiao:'Madureira',priority:false,porque:'Alto fluxo. Canal importante para o projeto social — crianças com atraso motor e puérperas em situação de vulnerabilidade.'}
+];
+
+const STATUS_CYCLE=['','contacted','scheduled','partner'];
+const STATUS_LABELS={'':'Não contatado','contacted':'Contatado','scheduled':'Agendado','partner':'Parceiro ativo'};
+const AV_CLASS={obstetra:'av-ob',pediatra:'av-pe',hospital:'av-ho',ubs:'av-ub'};
+const PB_CLASS={obstetra:'pb-ob',pediatra:'pb-pe',hospital:'pb-ho',ubs:'pb-ub'};
+const TIPO_LABEL={obstetra:'Gineco/Obstetra',pediatra:'Pediatra',hospital:'Hospital/Maternidade',ubs:'UBS/SUS'};
+
+// ═══════════════════════════ STATE ═══════════════════════════
+let estado={};
+let faseAtiva=0;
+let partnerFilter='todos';
+
+function load(){
+  try{const s=localStorage.getItem(SK);if(s)estado=JSON.parse(s);}catch(e){}
+  FASES.forEach(f=>{if(!estado[f.id])estado[f.id]={checks:{},notas:{}}});
+  if(!estado.nomesel)estado.nomesel='Morada Fisioterapia';
+  if(!estado.slogansel)estado.slogansel='';
+  if(!estado.parceiros)estado.parceiros={};
+}
+function save(){
+  try{localStorage.setItem(SK,JSON.stringify(estado));}catch(e){}
+  const t=document.getElementById('toast');
+  if(t){t.textContent='progresso salvo';t.style.opacity=1;setTimeout(()=>t.style.opacity=0,2000);}
+}
+
+// ═══════════════════════════ METRICS ═══════════════════════════
+function totalItems(){return FASES.reduce((a,f)=>a+f.itens.length,0);}
+function doneItems(){return FASES.reduce((a,f)=>a+f.itens.filter(it=>estado[f.id]?.checks[it.id]).length,0);}
+function faseDone(f){return f.itens.filter(it=>estado[f.id]?.checks[it.id]).length;}
+
+function updateHero(){
+  const tot=totalItems(),done=doneItems();
+  const pct=Math.round(done/tot*100);
+  ['h-pct','rep-pct'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=pct+'%';});
+  ['h-fill'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.width=pct+'%';});
+  ['h-feitos','rep-feitos'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=done;});
+  const fasesIni=FASES.filter(f=>faseDone(f)>0).length;
+  ['rep-fases'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=fasesIni+'/'+FASES.length;});
+  const pend=FASES.flatMap(f=>f.itens.filter(it=>!estado[f.id]?.checks[it.id]&&it.p)).length;
+  ['rep-pend'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=pend;});
+}
+
+// ═══════════════════════════ NAVIGATION ═══════════════════════════
+function goPage(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.ntab').forEach(b=>b.classList.remove('on'));
+  document.getElementById('page-'+id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo(0,0);
+  if(id==='relatorio')buildReport();
+}
+
+// ═══════════════════════════ ROADMAP ═══════════════════════════
+function renderFaseGrid(){
+  const g=document.getElementById('fase-grid');
+  if(!g)return;
+  g.innerHTML=FASES.map((f,i)=>{
+    const done=faseDone(f),tot=f.itens.length,pct=Math.round(done/tot*100);
+    return`<div class="fase-card${i===faseAtiva?' sel':''}${done===tot?' done':''}" onclick="setFase(${i})">
+      <div class="fc-icon">${f.icon}</div>
+      <div class="fc-n">Fase ${i+1}</div>
+      <div class="fc-name">${f.nome}</div>
+      <div class="fc-bar"><div class="fc-fill" style="width:${pct}%"></div></div>
+      <div class="fc-pct">${done}/${tot} · ${pct}%</div>
+    </div>`;
+  }).join('');
+}
+
+function renderFaseDetail(){
+  const f=FASES[faseAtiva];
+  const est=estado[f.id];
+  const done=faseDone(f),tot=f.itens.length;
+  const el=document.getElementById('fase-detail');
+  if(!el)return;
+  el.innerHTML=`<div class="task-box">
+    <div class="task-head">
+      <div class="th-left">${f.icon} ${f.nome}</div>
+      <div class="th-count">${done} de ${tot} concluídos</div>
+    </div>
+    ${f.itens.map(it=>{
+      const ck=!!est?.checks[it.id];
+      const nota=est?.notas[it.id]||'';
+      return`<div class="task-item${ck?' done':''}" id="ti_${it.id}">
+        <div class="ti-row" onclick="toggleCheck('${f.id}','${it.id}')">
+          <div class="ti-chk">${ck?'✓':''}</div>
+          <div class="ti-body">
+            <div class="ti-title">${it.t}${it.p?'<span class="tag tag-p">prioritário</span>':''}${it.r?'<span class="tag tag-r">com ProUP!</span>':''}</div>
+            <div class="ti-desc">${it.d}</div>
+          </div>
+        </div>
+        <div class="ti-note"><textarea placeholder="Decisões, datas, links…" onchange="saveNota('${f.id}','${it.id}',this.value)">${nota}</textarea></div>
+      </div>`;
+    }).join('')}
+  </div>`;
+}
+
+function setFase(i){faseAtiva=i;renderFaseGrid();renderFaseDetail();}
+function toggleCheck(fid,iid){
+  estado[fid].checks[iid]=!estado[fid].checks[iid];
+  save();updateHero();renderFaseGrid();renderFaseDetail();
+}
+function saveNota(fid,iid,v){estado[fid].notas[iid]=v;save();}
+
+// ═══════════════════════════ FINANCEIRO ═══════════════════════════
+function calcFin(){
+  const sess=+document.getElementById('sl-sess').value;
+  const val=+document.getElementById('sl-val').value;
+  const soc=+document.getElementById('sl-soc').value;
+  const ocup=+document.getElementById('sl-ocup').value/100;
+  document.getElementById('ov-sess').textContent=sess+' sess.';
+  document.getElementById('ov-val').textContent='R$'+val;
+  document.getElementById('ov-soc').textContent=soc+(soc===1?' sócia':' sócias');
+  document.getElementById('ov-ocup').textContent=Math.round(ocup*100)+'%';
+  const fat=Math.round(sess*4*val*soc*ocup);
+  const simples=Math.round(fat*0.06);
+  const pl=Math.round(fat*0.28);
+  const res=Math.round(fat*0.10);
+  const custos=2440;
+  const disp=Math.max(0,fat-simples-pl-res-custos);
+  const por=soc>0?Math.round((disp+pl)/soc):0;
+  const fmt=v=>'R$'+v.toLocaleString('pt-BR');
+  document.getElementById('r-fat').textContent=fmt(fat);
+  document.getElementById('r-simples').textContent=fmt(simples);
+  document.getElementById('r-pl').textContent=fmt(pl);
+  document.getElementById('r-res').textContent=fmt(res);
+  document.getElementById('r-disp').textContent=fmt(disp);
+  document.getElementById('r-por').textContent=fmt(por);
+  document.getElementById('h-fat').textContent=fmt(fat);
+  const pe=val>0?Math.ceil(custos/val):0;
+  document.getElementById('pe-val').textContent='~'+pe+' sessões/mês';
+}
+
+// ═══════════════════════════ CHARTS ═══════════════════════════
+function buildCharts(){
+  // Projeção
+  const projEl=document.getElementById('chart-proj');
+  if(projEl&&!projEl._built){
+    projEl._built=true;
+    const meses=['Jul/26','Ago','Set','Out','Nov','Dez','Jan/27','Fev','Mar','Abr','Mai','Jun'];
+    const fat=[3600,4800,6000,7200,8400,9600,10800,12000,13200,14400,16000,18000];
+    const liq=fat.map(v=>Math.round(Math.max(0,v-v*0.06-v*0.28-v*0.10-2440)));
+    const pe=new Array(12).fill(2440);
+    new Chart(projEl,{type:'line',data:{labels:meses,datasets:[
+      {label:'Faturamento',data:fat,borderColor:MO,backgroundColor:'transparent',tension:.3,pointRadius:3,borderWidth:2},
+      {label:'Líquido',data:liq,borderColor:TEAL,backgroundColor:'transparent',tension:.3,pointRadius:3,borderWidth:2,borderDash:[4,3]},
+      {label:'Equilíbrio',data:pe,borderColor:AMBER,backgroundColor:'transparent',borderWidth:1.5,borderDash:[6,3],pointRadius:0}
+    ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>'R$'+Math.round(v/1000)+'k',font:{size:10}},grid:{color:'rgba(0,0,0,0.04)'}},x:{ticks:{font:{size:10}}}}}});
+  }
+  // Radar
+  const radEl=document.getElementById('chart-radar');
+  if(radEl&&!radEl._built){
+    radEl._built=true;
+    new Chart(radEl,{type:'radar',data:{
+      labels:['Custo baixo','Demanda','Baixa concorrência','Acessibilidade','Parcerias'],
+      datasets:[
+        {label:'Valqueire',data:[6,7,8,7,8],borderColor:TEAL,backgroundColor:TEAL+'22',pointRadius:3,borderWidth:2},
+        {label:'Madureira',data:[8,9,5,9,6],borderColor:MO,backgroundColor:MO+'22',pointRadius:3,borderWidth:2},
+        {label:'Sulacap',data:[7,5,9,5,6],borderColor:AMBER,backgroundColor:AMBER+'22',pointRadius:3,borderWidth:2},
+        {label:'Barra',data:[2,6,2,4,4],borderColor:'#aaa',backgroundColor:'#aaa22',pointRadius:3,borderWidth:2}
+      ]
+    },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{r:{min:0,max:10,ticks:{stepSize:2,font:{size:9}}}}}});
+  }
+  // Mercado
+  const mktEl=document.getElementById('chart-mercado');
+  if(mktEl&&!mktEl._built){
+    mktEl._built=true;
+    new Chart(mktEl,{type:'bar',data:{
+      labels:['Valqueire','Madureira','Sulacap','Realengo','Barra'],
+      datasets:[
+        {label:'Fisio pélvica',data:[1,3,0,2,8],backgroundColor:MO},
+        {label:'Fisio infantil',data:[2,4,1,3,9],backgroundColor:TEAL}
+      ]
+    },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:10}}},y:{title:{display:true,text:'Clínicas est.',font:{size:10}},ticks:{stepSize:2,font:{size:10}}}}}});
+  }
+}
+
+// ═══════════════════════════ MARCA ═══════════════════════════
+function renderMarca(){
+  const ng=document.getElementById('nome-grid');
+  if(ng) ng.innerHTML=NOMES.map(n=>`<div class="nome-card${estado.nomesel===n.n?' sel':''}" onclick="selNome('${n.n}')">
+    <div class="nc-title">${n.n}</div>
+    <div class="nc-slogan">${n.slogan}</div>
+    <div class="nc-desc">${n.d}</div>
+  </div>`).join('');
+  const sl=document.getElementById('slogan-list');
+  if(sl) sl.innerHTML=SLOGANS.map(s=>`<div class="slogan-item${estado.slogansel===s?' sel':''}" onclick="selSlogan('${s.replace(/'/g,"\\'")}')">
+    <div class="sl-radio"><div class="sl-dot"></div></div>
+    <div class="slogan-text">"${s}"</div>
+  </div>`).join('');
+}
+function selNome(n){estado.nomesel=n;save();renderMarca();}
+function selSlogan(s){estado.slogansel=s;save();renderMarca();}
+
+// ═══════════════════════════ PARCEIROS ═══════════════════════════
+function renderPartners(){
+  updatePartnerMetrics();
+  const filt=partnerFilter==='todos'?PARCEIROS:PARCEIROS.filter(p=>p.tipo===partnerFilter);
+  ['Valqueire','Madureira'].forEach(reg=>{
+    const el=document.getElementById('pg-'+reg.toLowerCase());
+    if(!el)return;
+    const arr=filt.filter(p=>p.regiao===reg);
+    el.innerHTML=arr.length===0?'<div style="font-size:12px;color:var(--gray);padding:8px">Nenhum resultado para este filtro.</div>':arr.map(renderPartnerCard).join('');
+  });
+}
+function renderPartnerCard(p){
+  const st=estado.parceiros[p.id]||'';
+  const init=p.nome.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase().slice(0,2);
+  return`<div class="partner-card${p.priority?' priority':''}">
+    <div class="pc-top">
+      <div class="pc-avatar ${AV_CLASS[p.tipo]}">${init}</div>
+      <div style="flex:1">
+        <div class="pc-name">${p.nome}</div>
+        <div class="pc-spec">${p.spec}</div>
+        <span class="pc-badge ${PB_CLASS[p.tipo]}">${TIPO_LABEL[p.tipo]}</span>
+        ${p.priority?'<span class="pc-badge pb-pri">prioritário</span>':''}
+        <span class="status-btn ${st}" onclick="cycleStatus('${p.id}')">${STATUS_LABELS[st]} ▸</span>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--gray);display:flex;gap:4px;margin-bottom:6px">📍 ${p.end}</div>
+    <div class="pc-why">${p.porque}</div>
+  </div>`;
+}
+function cycleStatus(id){
+  const cur=estado.parceiros[id]||'';
+  const idx=STATUS_CYCLE.indexOf(cur);
+  estado.parceiros[id]=STATUS_CYCLE[(idx+1)%STATUS_CYCLE.length];
+  save();renderPartners();
+}
+function filterPartners(tipo,btn){
+  partnerFilter=tipo;
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderPartners();
+}
+function updatePartnerMetrics(){
+  const all=PARCEIROS;
+  document.getElementById('pm-total').textContent=all.length;
+  document.getElementById('pm-cont').textContent=all.filter(p=>(estado.parceiros[p.id]||'')!=='').length;
+  document.getElementById('pm-agen').textContent=all.filter(p=>estado.parceiros[p.id]==='scheduled').length;
+  document.getElementById('pm-part').textContent=all.filter(p=>estado.parceiros[p.id]==='partner').length;
+}
+
+// ═══════════════════════════ RELATÓRIO ═══════════════════════════
+function buildReport(){
+  const done=doneItems(),tot=totalItems();
+  const pct=Math.round(done/tot*100);
+  const now=new Date();
+  const dateStr=now.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'});
+  const el=document.getElementById('rep-date');if(el)el.textContent='Gerado em '+dateStr;
+  const fe=document.getElementById('rep-footer-date');if(fe)fe.textContent=dateStr;
+  // Fases grid
+  const fg=document.getElementById('rep-fases-grid');
+  if(fg){
+    fg.innerHTML=FASES.map(f=>{
+      const d=faseDone(f),t=f.itens.length,pp=Math.round(d/t*100);
+      return`<div class="fr-card">
+        <div class="fr-name">${f.icon} ${f.nome}</div>
+        <div class="fr-bar-wrap"><div class="fr-bar" style="width:${pp}%"></div></div>
+        <div class="fr-stat">${d}/${t} itens · ${pp}%</div>
+      </div>`;
+    }).join('');
+  }
+  // Pendentes
+  const pl=document.getElementById('rep-pending');
+  if(pl){
+    const pends=FASES.flatMap(f=>f.itens.filter(it=>!estado[f.id]?.checks[it.id]).map(it=>({...it,fase:f.nome})));
+    const pris=pends.filter(it=>it.p||it.r).slice(0,8);
+    pl.innerHTML=pris.length===0?'<div style="font-size:12px;color:var(--teal);padding:8px">Nenhuma ação prioritária pendente — parabéns!</div>':pris.map(it=>`<div class="pl-item">
+      <span class="pl-tag ${it.p?'p':it.r?'r':'norm'}">${it.p?'prioritário':it.r?'com ProUP!':'pendente'}</span>
+      <span class="pl-text"><strong>${it.fase}</strong> — ${it.t}</span>
+    </div>`).join('');
+  }
+  // Marca
+  const rm=document.getElementById('rep-marca');
+  if(rm) rm.textContent=`Nome selecionado: ${estado.nomesel||'Não definido'} · Slogan: ${estado.slogansel?'"'+estado.slogansel+'"':'Não definido'}`;
+  updateHero();
+}
+
+// ═══════════════════════════ INIT ═══════════════════════════
+load();
+updateHero();
+renderFaseGrid();
+renderFaseDetail();
+renderMarca();
+renderPartners();
+calcFin();
+buildReport();
+document.getElementById('rep-date') && (document.getElementById('rep-date').textContent='Gerado em '+new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'}));
+document.getElementById('rep-footer-date') && (document.getElementById('rep-footer-date').textContent=new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'}));
+
+setTimeout(()=>{buildCharts();},200);
+</script>
+</body>
+</html>
