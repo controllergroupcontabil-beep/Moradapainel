@@ -1,2 +1,0 @@
-# Moradapainel
-Porjeto Morada
